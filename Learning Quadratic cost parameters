@@ -1,0 +1,28 @@
+import numpy as np
+from scipy.optimize import curve_fit
+
+def quadratic_cost_function(x, a, b, c):
+    return a * x**2 + b * x + c
+
+# Sample ordering cost data (replace this with your actual data)
+x_data = np.array([1, 2, 3, 4, 5])
+y_data = np.array([10, 8, 6, 4, 2])
+
+# Fit the quadratic cost function to the data
+params, covariance = curve_fit(quadratic_cost_function, x_data, y_data)
+
+# Extract the parameters (a, b, c)
+a_fit, b_fit, c_fit = params
+
+# Print the fitted parameters
+print(f"Fitted Parameters: a={a_fit}, b={b_fit}, c={c_fit}")
+
+# Plot the original data and the fitted quadratic function
+import matplotlib.pyplot as plt
+
+plt.scatter(x_data, y_data, label='Original Data')
+plt.plot(x_data, quadratic_cost_function(x_data, a_fit, b_fit, c_fit), color='red', label='Fitted Quadratic Function')
+plt.xlabel('Ordering Cost Data')
+plt.ylabel('Quadratic Cost Function')
+plt.legend()
+plt.show()
